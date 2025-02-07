@@ -1,14 +1,13 @@
 import React from "react";
 
 export const metadata = {
-  title: "Accounts",
-  description: "The Wild Oasis project",
+  title: "Guest area",
 };
 
 export default function page() {
   return (
-    <div>
-      <h1>Account Page</h1>
-    </div>
+    <h2 className="font-semibold text-2xl text-accent-400 mb-7">
+      Welcome, Abdi
+    </h2>
   );
 }
