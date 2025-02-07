@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+export const metadata = {
+  title:"Update Profile"
+}
+
 export default function Page() {
   const countries = [
     { code: "pt", name: "Portugal" },
