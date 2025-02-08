@@ -1,10 +1,14 @@
 import React from "react";
+import { getCabins } from "../_lib/data-service";
+import CabinCard from "../_components/CabinCard";
 
 export const metadata = {
   title: "Cabins",
 };
 
-export default function page() {
+export default async function page() {
+  const cabins = await getCabins();
+
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -18,6 +22,13 @@ export default function page() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
+      {cabins.length > 0 && (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
+          {cabins.map((cabin) => (
+            <CabinCard key={cabin.id} cabin={cabin} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
