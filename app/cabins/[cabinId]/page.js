@@ -1,21 +1,23 @@
 import React from "react";
 import { getCabin } from "../../_lib/data-service";
-
 import Image from "next/image";
 import { EyeSlashIcon, MapPinIcon, UserIcon } from "@heroicons/react/24/solid";
-import TextExpander from "@/app/_components/TextExpander";
+import TextExpander from "../../_components/TextExpander";
 
 export const revalidate = 86400;
 
+// Metadata function
 export async function generateMetadata({ params }) {
-  const cabin = await getCabin(params.cabinId);
+  let Params = await params;
+  const cabin = await getCabin(Params.cabinId);
   return {
     title: `Cabin ${cabin.name}`,
   };
 }
 
-export default async function page({ params }) {
-  const cabin = await getCabin(params.cabinId);
+export default async function Page({ params }) {
+  let Params = await params;
+  const cabin = await getCabin(Params.cabinId);
 
   const { id, name, maxCapacity, regularPrice, discount, image, description } =
     cabin;
