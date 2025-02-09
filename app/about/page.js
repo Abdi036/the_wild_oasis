@@ -2,8 +2,13 @@ import Image from "next/image";
 import image1 from "@/public/about-1.jpg";
 import image2 from "@/public/about-2.jpg";
 import Link from "next/link";
+import { getCabins } from "../_lib/data-service";
 
-export default function page() {
+export const revalidate = 86400;
+
+export default async function page() {
+  const cabins = await getCabins();
+
   return (
     <div className="grid grid-cols-5 gap-x-24 gap-y-32 text-lg items-center">
       <div className="col-span-3">
@@ -20,11 +25,11 @@ export default function page() {
             harmonious escape from the ordinary.
           </p>
           <p>
-            With 8 meticulously designed luxury cabins, guests can enjoy a
-            unique combination of privacy and connection to nature. Whether you
-            wish to explore the breathtaking mountain landscapes, relax in the
-            warmth of a hot tub, or stargaze by a cozy campfire, The Wild Oasis
-            offers the perfect setting for every occasion.
+            With {cabins.length} meticulously designed luxury cabins, guests can
+            enjoy a unique combination of privacy and connection to nature.
+            Whether you wish to explore the breathtaking mountain landscapes,
+            relax in the warmth of a hot tub, or stargaze by a cozy campfire,
+            The Wild Oasis offers the perfect setting for every occasion.
           </p>
           <p>
             Our mission is to deliver exceptional experiences by creating a

@@ -1,3 +1,4 @@
+"use client";
 import {
   CalendarDaysIcon,
   HomeIcon,
@@ -6,8 +7,11 @@ import {
 import Link from "next/link";
 import React from "react";
 import SignOutButton from "./SignOutButton";
+import { usePathname } from "next/navigation";
 
 export default function SideNavigation() {
+  const pathName = usePathname();
+
   const navLinks = [
     {
       name: "Home",
@@ -32,7 +36,9 @@ export default function SideNavigation() {
         {navLinks.map((link) => (
           <li key={link.name}>
             <Link
-              className={`py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200`}
+              className={`py-3 px-5 hover:bg-primary-900 hover:text-primary-100 transition-colors flex items-center gap-4 font-semibold text-primary-200 ${
+                pathName === link.href ? "bg-primary-800" : ""
+              }`}
               href={link.href}
             >
               {link.icon}
