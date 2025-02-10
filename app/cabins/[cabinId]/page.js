@@ -1,8 +1,14 @@
-import React from "react";
-import { getCabin } from "../../_lib/data-service";
-import Image from "next/image";
+import Reservation from "@/app/_components/Reservation";
+import Spinner from "@/app/_components/Spinner";
 import { EyeSlashIcon, MapPinIcon, UserIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
+import { Suspense } from "react";
 import TextExpander from "../../_components/TextExpander";
+import {
+  getBookedDatesByCabinId,
+  getCabin,
+  getSettings,
+} from "../../_lib/data-service";
 
 export const revalidate = 86400;
 
@@ -67,9 +73,12 @@ export default async function Page({ params }) {
         </div>
       </div>
       <div>
-        <h2 className="text-5xl font-semibold text-center">
+        <h2 className="text-5xl font-semibold text-center mb-10 text-accent-400">
           Reserve today. Pay on Arrival.
         </h2>
+        <Suspense fallback={<Spinner />}>
+          <Reservation cabin={cabin} />
+        </Suspense>
       </div>
     </div>
   );
