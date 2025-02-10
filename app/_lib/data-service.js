@@ -55,3 +55,17 @@ export async function getGuest(email) {
 
   return data;
 }
+
+export async function getCountries() {
+  try {
+    const res = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,flags"
+    );
+
+    const countries = await res.json();
+    return countries;
+  } catch (error) {
+    throw new Error("Countries could not be loaded");
+  }
+}
+ 
