@@ -26,7 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async session({ session, user }) {
-      const guest = await getGuest(user.email);
+      const guest = await getGuest(session?.user.email);
       session.user.guestID = guest.id;
       return session;
     },
