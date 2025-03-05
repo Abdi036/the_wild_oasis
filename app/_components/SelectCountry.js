@@ -1,39 +1,31 @@
-import React from "react";
 import { getCountries } from "../_lib/data-service";
 
-export default async function SelectCountry({
-  defaultCountry,
-  name,
-  id,
-  className,
-}) {
-  const Countries = await getCountries();
-
-  const sortedCountries = Countries.sort((a, b) =>
+async function SelectCountry({ defaultCountry, name, id, className }) {
+  const countries = await getCountries();
+  const sortedCountries = countries.sort((a, b) =>
     a.name.common.localeCompare(b.name.common)
   );
 
   const defaultCountryData = sortedCountries.find(
     (country) => country.name.common === defaultCountry
   );
-  const flag = defaultCountryData?.flags?.png ?? "";
+  const flag = defaultCountryData?.flags?.svg ?? "";
 
   return (
     <select
       name={name}
       id={id}
-      defaultValue={`${defaultCountry}%${flag}`}
+      defaultValue={defaultCountry}
       className={className}
     >
       <option value="">Select country...</option>
-      {sortedCountries.map((country) => (
-        <option
-          key={country.name.common}
-          value={`${country.name.common}%${country.flags.png}`}
-        >
-          {country.name.common}
+      {sortedCountries.map((c) => (
+        <option key={c.name.common} value={`${c.name.common}%${c.flags?.svg}`}>
+          {c.name.common}
         </option>
       ))}
     </select>
   );
 }
+
+export default SelectCountry;

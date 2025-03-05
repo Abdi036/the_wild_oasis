@@ -136,10 +136,9 @@ export async function getCountries() {
     const res = await fetch(
       "https://restcountries.com/v3.1/all?fields=name,flags"
     );
-
     const countries = await res.json();
     return countries;
-  } catch (error) {
+  } catch {
     throw new Error("Countries could not be loaded");
   }
 }
